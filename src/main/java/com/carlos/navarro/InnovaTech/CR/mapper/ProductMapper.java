@@ -4,7 +4,9 @@ import com.carlos.navarro.InnovaTech.CR.dto.ProductRequest;
 import com.carlos.navarro.InnovaTech.CR.dto.ProductResponse;
 import com.carlos.navarro.InnovaTech.CR.model.Category;
 import com.carlos.navarro.InnovaTech.CR.model.Product;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ProductMapper {
     public Product toEntity(ProductRequest request, Category category) {
         Product product = new Product();

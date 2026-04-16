@@ -3,7 +3,9 @@ package com.carlos.navarro.InnovaTech.CR.mapper;
 import com.carlos.navarro.InnovaTech.CR.dto.CategoryRequest;
 import com.carlos.navarro.InnovaTech.CR.dto.CategoryResponse;
 import com.carlos.navarro.InnovaTech.CR.model.Category;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CategoryMapper {
     public Category toEntity(CategoryRequest request) {
         Category category = new Category();

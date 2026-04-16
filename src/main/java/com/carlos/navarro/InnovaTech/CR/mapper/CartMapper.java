@@ -2,7 +2,9 @@ package com.carlos.navarro.InnovaTech.CR.mapper;
 
 import com.carlos.navarro.InnovaTech.CR.dto.CartItemResponse;
 import com.carlos.navarro.InnovaTech.CR.model.CartItem;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CartMapper {
     public CartItemResponse toResponse(CartItem item) {
         CartItemResponse dto = new CartItemResponse();

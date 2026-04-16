@@ -4,9 +4,11 @@ import com.carlos.navarro.InnovaTech.CR.dto.OrderItemResponse;
 import com.carlos.navarro.InnovaTech.CR.dto.OrderResponse;
 import com.carlos.navarro.InnovaTech.CR.model.Order;
 import com.carlos.navarro.InnovaTech.CR.model.OrderItem;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public class OrderMapper {
     public OrderItemResponse toItemResponse(OrderItem item) {
         OrderItemResponse dto = new OrderItemResponse();
