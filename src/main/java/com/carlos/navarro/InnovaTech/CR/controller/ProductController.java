@@ -32,4 +32,20 @@ public class ProductController {
 
         return ResponseEntity.ok(productService.create(request));
     }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<ProductResponse>> getByCategory(
+            @PathVariable Long categoryId,
+            @RequestParam(defaultValue = "asc") String sort
+    ) {
+        return ResponseEntity.ok(productService.getByCategory(categoryId, sort));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductResponse>> search(
+            @RequestParam String keyword
+    ) {
+        return ResponseEntity.ok(productService.search(keyword));
+    }
+
 }

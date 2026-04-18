@@ -9,4 +9,7 @@ public interface ProductService {
     List<ProductResponse> getAll();
     ProductResponse getById(Long id);
     ProductResponse create(ProductRequest request);
+
+    List<ProductResponse> getByCategory(Long categoryId, String sortDir);
+    List<ProductResponse> search(String keyword);
 }

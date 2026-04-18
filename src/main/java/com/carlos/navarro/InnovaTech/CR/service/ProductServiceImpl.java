@@ -9,6 +9,7 @@ import com.carlos.navarro.InnovaTech.CR.model.Product;
 import com.carlos.navarro.InnovaTech.CR.repository.CategoryRepository;
 import com.carlos.navarro.InnovaTech.CR.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,5 +49,26 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
 
         return productMapper.toResponse(product);
+    }
+
+    @Override
+    public List<ProductResponse> getByCategory(Long categoryId, String sortDir) {
+        Sort sort = sortDir.equalsIgnoreCase("desc")
+                ? Sort.by("price").descending()
+                : Sort.by("price").ascending();
+
+        return productRepository.findByCategoryId(categoryId, sort)
+                .stream()
+                .map(productMapper::toResponse)
+                .toList();
+    }
+
+    @Override
+    public List<ProductResponse> search(String keyword) {
+        return productRepository
+                .findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(keyword, keyword)
+                .stream()
+                .map(productMapper::toResponse)
+                .toList();
     }
 }
