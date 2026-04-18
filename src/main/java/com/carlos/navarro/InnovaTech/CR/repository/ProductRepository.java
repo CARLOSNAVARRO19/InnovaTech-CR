@@ -1,16 +1,22 @@
 package com.carlos.navarro.InnovaTech.CR.repository;
 
 import com.carlos.navarro.InnovaTech.CR.model.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
+
+    List<Product> findAll(Sort sort);
+
     List<Product> findByCategoryId(Long categoryId);
 
     List<Product> findByCategoryId(Long categoryId, Sort sort);
 
-    List<Product> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(
-            String name, String description);
+    List<Product> findByNameContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String name, String description);
+
+    Page<Product> findAll(Pageable pageable);
 }

@@ -9,6 +9,9 @@ import com.carlos.navarro.InnovaTech.CR.model.Product;
 import com.carlos.navarro.InnovaTech.CR.repository.CategoryRepository;
 import com.carlos.navarro.InnovaTech.CR.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +26,16 @@ public class ProductServiceImpl implements ProductService {
     private final CategoryRepository categoryRepository;
     private final ProductMapper productMapper;
 
-    @Override
-    public List<ProductResponse> getAll() {
-        return productRepository.findAll()
-                .stream()
-                .map(productMapper::toResponse)
-                .toList();
+    public Page<ProductResponse> getAll(int page, int size, String sortDir) {
+
+        Sort sort = sortDir.equalsIgnoreCase("desc")
+                ? Sort.by("price").descending()
+                : Sort.by("price").ascending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+
+        return productRepository.findAll(pageable)
+                .map(productMapper::toResponse);
     }
 
     @Override
